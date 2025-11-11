@@ -255,8 +255,5 @@ function init() {
     checkInitialState();
 }
 
-// Запуск прило
-
-
-жения после загрузки DOM
-document.addEventListener('DOMContentLoaded', init);.ori
+// Запуск приложения после загрузки DOM
+document.addEventListener('DOMContentLoaded', init);
