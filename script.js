@@ -23,6 +23,7 @@ const state = {
 function showMessage(message, isSuccess) {
     elements.messageContainer.textContent = message;
     elements.messageContainer.className = `message ${isSuccess ? 'success' : 'error'}`;
+    elements.messageContainer.style.display = 'block';
     
     // Автоматически скрыть сообщение через 5 секунд
     setTimeout(() => {
@@ -33,7 +34,6 @@ function showMessage(message, isSuccess) {
 // Функция для валидации формы
 function validateForm() {
     let isValid = true;
-    const formData = new FormData(elements.feedbackForm);
     
     // Сброс предыдущих ошибок
     document.querySelectorAll('.form-group').forEach(group => {
@@ -41,28 +41,28 @@ function validateForm() {
     });
     
     // Проверка обязательных полей
-    const fullName = formData.get('fullName');
+    const fullName = document.getElementById('fullName').value;
     if (!fullName || fullName.length < 2) {
         document.querySelector('#fullName').closest('.form-group').classList.add('invalid');
         isValid = false;
     }
     
-    const email = formData.get('email');
+    const email = document.getElementById('email').value;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email || !emailRegex.test(email)) {
         document.querySelector('#email').closest('.form-group').classList.add('invalid');
         isValid = false;
     }
     
-    const message = formData.get('message');
+    const message = document.getElementById('message').value;
     if (!message || message.length < 10) {
         document.querySelector('#message').closest('.form-group').classList.add('invalid');
         isValid = false;
     }
     
-    const privacyPolicy = formData.get('privacyPolicy');
-    if (!privacyPolicy) {
-        document.querySelector('#privacyPolicy').closest('.checkbox-group').classList.add('invalid');
+    const privacyPolicyChecked = document.getElementById('privacyPolicy').checked;
+    if (!privacyPolicyChecked) {
+        document.querySelector('.checkbox-group').classList.add('invalid');
         isValid = false;
     }
     
@@ -114,11 +114,11 @@ function openModal() {
     state.isModalOpen = true;
     
     // Изменяем URL с помощью History API
-    const newUrl = `${window.location.origin}${window.location.pathname}#feedback`;
-    window
+    const newUrl = `${window.location
 
 
-istory.pushState({ modal: true }, '', newUrl);
+gin}${window.location.pathname}#feedback`;
+    window.history.pushState({ modal: true }, '', newUrl);
     
     // Загружаем сохраненные данные
     loadFormData();
@@ -134,7 +134,7 @@ function closeModal() {
     
     // Возвращаем исходный URL
     if (window.location.hash === '#feedback') {
-        window.history.back();
+        window.history.pushState(null, '', window.location.pathname);
     }
     
     // Скрываем сообщения
@@ -243,7 +243,9 @@ function initEventListeners() {
 function checkInitialState() {
     // Проверяем, открыта ли форма при загрузке страницы (если есть хэш)
     if (window.location.hash === '#feedback') {
-        openModal();
+        state.isModalOpen = true;
+        elements.modalOverlay.classList.add('active');
+        loadFormData();
     }
 }
 
@@ -253,5 +255,8 @@ function init() {
     checkInitialState();
 }
 
-// Запуск приложения после загрузки DOM
-document.addEventListener('DOMContentLoaded', init);.h
+// Запуск прило
+
+
+жения после загрузки DOM
+document.addEventListener('DOMContentLoaded', init);.ori
