@@ -1,17 +1,11 @@
-/**
- * Форма обратной связи
- * Полностью соответствует требованиям валидации
- */
 
-// Strict mode для лучшей проверки ошибок
 'use strict';
 
-// Основной модуль приложения
 const FeedbackForm = (function () {
     // Приватные переменные
     let elements = {};
     const STORAGE_KEY = 'feedbackFormData';
-    const FORM_URL = 'https://formcarry.com/s/XXXXXXXXXXXX'; // Замените на ваш ID
+    const FORM_URL = 'https://formcarry.com/s/Qctz9jrLzl3'; 
 
     // Инициализация приложения
     function init() {
@@ -37,10 +31,10 @@ const FeedbackForm = (function () {
 
     // Привязка событий
     function bindEvents() {
-        // Открытие модального окна
+        // Открытие окна
         elements.openBtn.addEventListener('click', openModal);
 
-        // Закрытие модального окна
+        // Закрытие окна
         elements.closeBtn.addEventListener('click', closeModal);
 
         // Закрытие по клику на overlay
